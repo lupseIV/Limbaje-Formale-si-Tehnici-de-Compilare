@@ -1,0 +1,41 @@
+<program> ::= #include "<" iostream ">" using namespace std ; <lista_struct>
+            <main> | #include "<" iostream ">" using namespace std ; <main>
+<main> ::= int main ( ) { <lista_instr> return CONST ; }
+<lista_struct> ::= <def_struct> | <def_struct> <lista_struct>
+<def_struct> ::= struct ID { <lista_decl> } ;
+<lista_decl> ::= <decl> | <decl> <lista_decl>
+<decl> ::= <tip> <lista_id> ;
+<lista_id> ::= ID | ID, <lista_id>
+<tip> ::= int | double | ID
+
+<lista_instr> ::= <instr> | <instr> <lista_instr>
+<instr> ::= <decl> | <atribuire> | <intrare> | <iesire> | <instr_if> | <instr_while> | <instr_comp>
+
+<instr_comp> ::= { <lista_instr> }
+
+<atribuire> ::= <variabila> = <expr> ;
+<variabila> ::= ID | ID . ID
+
+<intrare> ::= cin <lista_citire> ;
+<lista_citire> ::= ">>" <variabila> | ">>" <variabila> <lista_citire> ;
+<iesire> ::= cout <lista_afisare> ;
+<lista_afisare> ::= "<<" <element> | "<<" <element> <lista_afisare>
+<element> ::= <expr> | endl
+
+<instr_if> ::= if ( <conditie> ) <instr> | if ( <conditie> ) <instr> else <instr>
+<instr_while> ::= while ( <conditie> ) <instr>
+<conditie> ::= <expr> <op_rel> <expr>
+<op_rel> ::= "<" | "<=" | ">" | ">=" | == | !=
+
+<expr> ::= <termen> | <expr> + <termen> | <expr> - <termen>
+<termen> ::= <factor> | <termen> * <factor> | <termen> / <factor>
+<factor> ::= <variabila> | CONST | ( <expr> )
+
+<ID> ::= <litera> | <ID> <litera> | <ID> <cifra>
+<litera> ::= <litera> ::= a | b | ... | z | A | B | ... | Z | _
+<CONST> ::= <const_int> | <const_real>
+<const_int> ::= 0 | <cifra_nenula> | <const_int> <sir_cifre>
+<const_real> ::= <const_int> . <sir_cifre>
+<sir_cifre> ::= <cifra> | <cifra> <sir_cifre>
+<cifra> ::= 0 | <cifra_nenula>
+<cifra_nenula> ::= 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9

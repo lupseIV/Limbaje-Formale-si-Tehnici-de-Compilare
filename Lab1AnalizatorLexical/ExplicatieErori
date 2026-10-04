@@ -1,0 +1,17 @@
+Eroare1.cpp - erori in MLP si in C++ (nu compileaza)
+
+1. Linia 5: int 1abc;
+   Un identificator nu poate incepe cu o cifra.
+
+2. Linia 7: x = 5 @ 2;
+   Caracterul "@" nu face parte din limbaj.
+
+
+Eroare2.cpp - erori in MLP, dar nu in C++ (compileaza si ruleaza)
+
+1. Linia 7: a = a % b;
+   Operatorul "%" nu exista in MLP. In C++ este operatorul modulo.
+
+2. Linia 8: b = 0x1F;
+   MLP accepta doar constante in baza 10. In C++ este o constanta hexazecimala (31).
+ 
