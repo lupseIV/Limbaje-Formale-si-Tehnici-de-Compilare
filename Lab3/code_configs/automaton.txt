@@ -1,0 +1,76 @@
+// DFA for MLP atoms.
+// Format: "start S", "final S LABEL", "FROM SYMBOL TO".
+// SYMBOL is one literal character or a class: letter (a-z A-Z _), digit (0-9), nonzero (1-9).
+// Labels: ID, CONST, KEYWORD, OPERATOR, SEPARATOR.
+
+start q0
+
+// identifiers (and keywords, looked up after acceptance)
+q0 letter qId
+qId letter qId
+qId digit qId
+final qId ID
+
+// #include
+q0 # qHash
+qHash letter qDir
+qDir letter qDir
+final qDir KEYWORD
+
+// integer constants: 0 | nonzero digit*
+q0 0 qZero
+q0 nonzero qInt
+qInt digit qInt
+final qZero CONST
+final qInt CONST
+
+// real constants: int . digit+
+qZero . qDot
+qInt . qDot
+qDot digit qReal
+qReal digit qReal
+final qReal CONST
+
+// single-character operators
+q0 + qOp
+q0 - qOp
+q0 * qOp
+q0 / qOp
+final qOp OPERATOR
+
+// = ==
+q0 = qAssign
+qAssign = qEq
+final qAssign OPERATOR
+final qEq OPERATOR
+
+// !=
+q0 ! qBang
+qBang = qNe
+final qNe OPERATOR
+
+// < <= <<
+q0 < qLt
+qLt = qLe
+qLt < qShl
+final qLt OPERATOR
+final qLe OPERATOR
+final qShl OPERATOR
+
+// > >= >>
+q0 > qGt
+qGt = qGe
+qGt > qShr
+final qGt OPERATOR
+final qGe OPERATOR
+final qShr OPERATOR
+
+// separators
+q0 ; qSep
+q0 , qSep
+q0 . qSep
+q0 { qSep
+q0 } qSep
+q0 ( qSep
+q0 ) qSep
+final qSep SEPARATOR

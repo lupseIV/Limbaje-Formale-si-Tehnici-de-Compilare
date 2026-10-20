@@ -10,3 +10,9 @@ cmake-build-*/
 *.o
 *.obj
 a.out
+
+# Lexer output
+*.lex/
+
+# VibeWise learning notes
+.vibe-wise/
