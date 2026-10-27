@@ -1,0 +1,9 @@
+// AFD: numere binare fara zerouri nesemnificative (0, 1, 10, 101, ...)
+stari q0 qZero qNum
+alfabet 0-1
+start q0
+final qZero qNum
+
+q0 0 qZero
+q0 1 qNum
+qNum 0-1 qNum

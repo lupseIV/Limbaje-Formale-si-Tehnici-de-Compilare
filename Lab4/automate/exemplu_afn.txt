@@ -1,0 +1,9 @@
+// AFN: secvente peste {a, b} care se termina cu "ab"
+stari p0 p1 p2
+alfabet a b
+start p0
+final p2
+
+p0 a-b p0
+p0 a p1
+p1 b p2

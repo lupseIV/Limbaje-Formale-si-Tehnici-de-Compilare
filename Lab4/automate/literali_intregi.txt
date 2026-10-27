@@ -1,0 +1,84 @@
+// AFD pentru constantele intregi (literali) din C/C++:
+// zecimal, octal, hexazecimal, binar, separatori ' (C++14) si sufixe u/l/ll.
+
+stari q0 qZero qDec qDecSep qOct qOctSep qHexPre qHex qHexSep qBinPre qBin qBinSep qU ql qL qll qLL qUl qUL qEnd
+alfabet 0-9 a-f A-F x X u U l L '
+
+start q0
+final qZero qDec qOct qHex qBin qU ql qL qll qLL qUl qUL qEnd
+
+// zecimal: 1-9 urmat de 0-9
+q0 0 qZero
+q0 1-9 qDec
+qDec 0-9 qDec
+qDec ' qDecSep
+qDecSep 0-9 qDec
+
+// octal: 0 urmat de 0-7
+qZero 0-7 qOct
+qZero ' qOctSep
+qOct 0-7 qOct
+qOct ' qOctSep
+qOctSep 0-7 qOct
+
+// hexazecimal: 0x / 0X urmat de cel putin o cifra hexa
+qZero x qHexPre
+qZero X qHexPre
+qHexPre 0-9 qHex
+qHexPre a-f qHex
+qHexPre A-F qHex
+qHex 0-9 qHex
+qHex a-f qHex
+qHex A-F qHex
+qHex ' qHexSep
+qHexSep 0-9 qHex
+qHexSep a-f qHex
+qHexSep A-F qHex
+
+// binar: 0b / 0B urmat de cel putin o cifra binara
+qZero b qBinPre
+qZero B qBinPre
+qBinPre 0-1 qBin
+qBin 0-1 qBin
+qBin ' qBinSep
+qBinSep 0-1 qBin
+
+// sufixe: toate starile de cifre intra in aceleasi stari de sufix
+qZero u qU
+qZero U qU
+qZero l ql
+qZero L qL
+qDec u qU
+qDec U qU
+qDec l ql
+qDec L qL
+qOct u qU
+qOct U qU
+qOct l ql
+qOct L qL
+qHex u qU
+qHex U qU
+qHex l ql
+qHex L qL
+qBin u qU
+qBin U qU
+qBin l ql
+qBin L qL
+
+// dupa u: l sau ll (aceeasi majuscula)
+qU l qUl
+qU L qUL
+qUl l qEnd
+qUL L qEnd
+
+// dupa l / ll: inca un l (aceeasi majuscula) sau u
+ql l qll
+qL L qLL
+ql u qEnd
+ql U qEnd
+qL u qEnd
+qL U qEnd
+qll u qEnd
+qll U qEnd
+qLL u qEnd
+qLL U qEnd
