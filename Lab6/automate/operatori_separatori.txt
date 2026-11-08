@@ -1,0 +1,50 @@
+// AFD pentru operatorii si separatorii MLP si pentru directiva #include.
+// Tipul atomului acceptat (operator / separator / cuvant cheie) se afla
+// apoi din tabelul de coduri (code_configs/).
+
+stari q0 qOne qAssign qEq qBang qNe qLt qLe qShl qGt qGe qShr qH qHi qHin qHinc qHincl qHinclu qHinclud qHinclude
+alfabet + - * / = ! < > ; , . { } ( ) # i n c l u d e
+
+start q0
+final qOne qAssign qEq qNe qLt qLe qShl qGt qGe qShr qHinclude
+
+// atomi de un singur caracter: + - * / ; , . { } ( )
+q0 + qOne
+q0 - qOne
+q0 * qOne
+q0 / qOne
+q0 ; qOne
+q0 , qOne
+q0 . qOne
+q0 { qOne
+q0 } qOne
+q0 ( qOne
+q0 ) qOne
+
+// = ==
+q0 = qAssign
+qAssign = qEq
+
+// !=
+q0 ! qBang
+qBang = qNe
+
+// < <= <<
+q0 < qLt
+qLt = qLe
+qLt < qShl
+
+// > >= >>
+q0 > qGt
+qGt = qGe
+qGt > qShr
+
+// #include
+q0 # qH
+qH i qHi
+qHi n qHin
+qHin c qHinc
+qHinc l qHincl
+qHincl u qHinclu
+qHinclu d qHinclud
+qHinclud e qHinclude

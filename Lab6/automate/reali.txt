@@ -1,0 +1,57 @@
+// AFD pentru constantele reale din C++ (decimal-floating-literal, [lex.fcon]):
+//   cifre . [cifre] [exponent] [sufix]     ex: 3.  3.14  3.14e-2  2.5f
+//   . cifre [exponent] [sufix]             ex: .5  .5e3
+//   cifre exponent [sufix]                 ex: 1e10  1E+3L
+// exponent = (e|E) [+|-] cifre ; sufix = f F l L ; separatorul ' (C++14) doar intre cifre.
+
+stari q0 qInt qIntSep qDot qPoint qFrac qFracSep qE qESign qExp qExpSep qSuf
+alfabet 0-9 . ' e E + - f F l L
+
+start q0
+final qPoint qFrac qExp qSuf
+
+// partea intreaga
+q0 0-9 qInt
+qInt 0-9 qInt
+qInt ' qIntSep
+qIntSep 0-9 qInt
+
+// punctul zecimal
+qInt . qPoint
+q0 . qDot
+qDot 0-9 qFrac
+
+// partea fractionara
+qPoint 0-9 qFrac
+qFrac 0-9 qFrac
+qFrac ' qFracSep
+qFracSep 0-9 qFrac
+
+// exponent
+qInt e qE
+qInt E qE
+qPoint e qE
+qPoint E qE
+qFrac e qE
+qFrac E qE
+qE + qESign
+qE - qESign
+qE 0-9 qExp
+qESign 0-9 qExp
+qExp 0-9 qExp
+qExp ' qExpSep
+qExpSep 0-9 qExp
+
+// sufix
+qPoint f qSuf
+qPoint F qSuf
+qPoint l qSuf
+qPoint L qSuf
+qFrac f qSuf
+qFrac F qSuf
+qFrac l qSuf
+qFrac L qSuf
+qExp f qSuf
+qExp F qSuf
+qExp l qSuf
+qExp L qSuf

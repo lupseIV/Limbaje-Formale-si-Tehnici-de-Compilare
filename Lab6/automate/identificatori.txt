@@ -1,0 +1,19 @@
+// AFD pentru identificatori (C++ [lex.name], restrans la caractere ASCII):
+// litera sau _ , urmat de oricate litere, cifre sau _ .
+// Cuvintele cheie sunt acceptate tot de acest automat si separate apoi
+// prin cautare in tabelul de coduri (code_configs/keywords.txt).
+
+stari q0 qId
+alfabet a-z A-Z 0-9 _
+
+start q0
+final qId
+
+q0 a-z qId
+q0 A-Z qId
+q0 _ qId
+
+qId a-z qId
+qId A-Z qId
+qId 0-9 qId
+qId _ qId
