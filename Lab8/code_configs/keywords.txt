@@ -1,0 +1,16 @@
+#include 2
+iostream 3
+using 4
+namespace 5
+std 6
+struct 7
+int 8
+double 9
+main 10
+return 11
+cin 12
+cout 13
+endl 14
+if 15
+else 16
+while 17
